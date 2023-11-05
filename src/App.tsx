@@ -6,9 +6,7 @@ function App() {
     <main>
       <Input id="name" label="Your name" type="text" />
       <p>
-        <Button el="anchor" href="www.google.con">
-          A link
-        </Button>
+        <Button href="www.google.con">A link</Button>
       </p>
     </main>
   );
