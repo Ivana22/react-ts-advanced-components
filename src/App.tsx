@@ -1,5 +1,6 @@
 import Input from "./components/Input.tsx";
 import Button from "./components/Button.tsx";
+import Container from "./components/Container.tsx";
 
 function App() {
   return (
@@ -8,6 +9,9 @@ function App() {
       <p>
         <Button href="www.google.con">A link</Button>
       </p>
+      <Container as={Button} onClick={() => alert("clicked")}>
+        CLick me
+      </Container>
     </main>
   );
 }
