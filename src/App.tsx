@@ -1,14 +1,18 @@
 import Input from "./components/Input.tsx";
 import Button from "./components/Button.tsx";
 import Container from "./components/Container.tsx";
-import Form from "./components/Form.tsx";
+import Form, { type FormHandle } from "./components/Form.tsx";
 import { useRef } from "react";
 
 function App() {
+  const customForm = useRef<FormHandle>(null);
+
   const input = useRef<HTMLInputElement>(null);
 
   function handleSave(data: unknown) {
     const extractedData = data as { name: string; age: string };
+    console.log(extractedData);
+    customForm.current?.clear();
   }
 
   return (
@@ -22,7 +26,7 @@ function App() {
       </Container>
       <br />
       <br />
-      <Form>
+      <Form onSave={handleSave} ref={customForm}>
         <Input type="text" label="name" id="name" />
         <Input type="age" label="age" id="age" />
         <Button>Save</Button>
