@@ -10,7 +10,7 @@ type TimersState = {
   timers: Timer[];
 };
 
-const initalState: TimersState = {
+const initialState: TimersState = {
   isRunning: true,
   timers: [],
 };
@@ -38,11 +38,11 @@ type TimersContextProviderProps = {
 };
 
 type StartTimersAction = {
-  type: "START_TIMER";
+  type: "START_TIMERS";
 };
 
 type StopTimersAction = {
-  type: "STOP_TIMER";
+  type: "STOP_TIMERS";
 };
 
 type AddTimerAction = {
@@ -53,13 +53,13 @@ type AddTimerAction = {
 type Action = StartTimersAction | StopTimersAction | AddTimerAction;
 
 function timersReducer(state: TimersState, action: Action): TimersState {
-  if (action.type === "START_TIMER") {
+  if (action.type === "START_TIMERS") {
     return {
       ...state,
       isRunning: true,
     };
   }
-  if (action.type === "STOP_TIMER") {
+  if (action.type === "STOP_TIMERS") {
     return {
       ...state,
       isRunning: false,
@@ -70,7 +70,10 @@ function timersReducer(state: TimersState, action: Action): TimersState {
       ...state,
       timers: [
         ...state.timers,
-        { name: action.payload.name, duration: action.payload.duration },
+        {
+          name: action.payload.name,
+          duration: action.payload.duration,
+        },
       ],
     };
   }
@@ -79,7 +82,7 @@ function timersReducer(state: TimersState, action: Action): TimersState {
 export default function TimersContextProvider({
   children,
 }: TimersContextProviderProps) {
-  const [timersState, dispatch] = useReducer(timersReducer, initalState);
+  const [timersState, dispatch] = useReducer(timersReducer, initialState);
 
   const ctx: TimersContextValue = {
     timers: timersState.timers,
@@ -88,10 +91,10 @@ export default function TimersContextProvider({
       dispatch({ type: "ADD_TIMER", payload: timerData });
     },
     startTimers() {
-      dispatch({ type: "START_TIMER" });
+      dispatch({ type: "START_TIMERS" });
     },
     stopTimers() {
-      dispatch({ type: "STOP_TIMER" });
+      dispatch({ type: "STOP_TIMERS" });
     },
   };
   return (
