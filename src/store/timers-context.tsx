@@ -77,6 +77,7 @@ function timersReducer(state: TimersState, action: Action): TimersState {
       ],
     };
   }
+  return state;
 }
 
 export default function TimersContextProvider({
